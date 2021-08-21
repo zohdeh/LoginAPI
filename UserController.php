@@ -22,7 +22,7 @@ class userController
 					if( $this->userId )
 					$processRequest->getUser($this->userId);
 					else
-					$processRequest->getUsers();
+					$processRequest->getAllUser();
 				}
 				
 			case 'POST':

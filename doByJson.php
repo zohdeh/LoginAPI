@@ -19,13 +19,13 @@ class doByJson implements InterfaceDoByFile
 			return notFoundUser();
 		else
 		
-		$response['GET'] = json_decode($result);
+		$response['body'] = json_encode($result);
 		$response['status_code_header'] = 'HTTP/1.1 200 OK';
 		return $response;
 	}
 	private function findByUserId($userId)
 	{
-		$usersJson = file_get_contents('$path');
+		$usersJson = fopen('$path',"r");
 		$result= json_decode($usersJson);
 		foreach ($result as $user)
 		{
@@ -36,8 +36,11 @@ class doByJson implements InterfaceDoByFile
 	}  }
 	public function getAllUser()
 	{
-		$usersJson = file_get_contents('$path');
-		$response = json_decode($usersJson);
+		$usersJson = fopen('$path',"r");
+		
+		$response['status_code_header'] = 'HTTP/1.1 200 OK';
+        $response['body'] = json_encode($usersJson);
+		fclose($usersJson);
 		return $response;
 		
 	}
