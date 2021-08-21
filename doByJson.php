@@ -6,7 +6,6 @@ class doByJson implements InterfaceDoByFile
 	public function __construct()
 	{
 		$path = $_SERVER['DOCUMENT_ROOT'].'/API/user.json';
-		//$jsonfile = file_get_contents($path);
 	}
 	public function __destruct()
 	{
@@ -37,10 +36,9 @@ class doByJson implements InterfaceDoByFile
 	public function getAllUser()
 	{
 		$usersJson = fopen('$path',"r");
-		
 		$response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($usersJson);
-		fclose($usersJson);
+        $response = json_encode($usersJson);
+		
 		return $response;
 		
 	}

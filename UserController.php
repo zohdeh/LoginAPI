@@ -5,16 +5,16 @@ class userController
 	private $requestMethod;
 	private $users;
 	private $userId;
-	private $processRequest;
 	public function __construct($uId,$rMethod)
 	{
-		$requestMethod = $rMethod;
-		$userId = $uId;
-		$processRequest = new doByJson();
+		$this->requestMethod = $rMethod;
+		$this->userId = $uId;
+				
 	}
 	
 	public function callAPI()
 	{
+		$processRequest =new doByJson();
 		switch ($this->requestMethod)
 		{
 			case 'GET':
