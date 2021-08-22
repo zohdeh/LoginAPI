@@ -5,24 +5,30 @@ class userController
 	private $requestMethod;
 	private $users;
 	private $userId;
-	private $processRequest;
-	public function __construct($uId,$rMethod)
+	private $password
+	public function __construct($uId,$pwd,$rMethod)
 	{
-		$requestMethod = $rMethod;
-		$userId = $uId;
-		$processRequest = new doByJson();
+		$this->requestMethod = $rMethod;
+		$this->userId = $uId;
+		$this->password = $pwd;
+				
 	}
 	
 	public function callAPI()
 	{
+		
+		$processRequest =new doByJson();
 		switch ($this->requestMethod)
 		{
 			case 'GET':
 				{
 					if( $this->userId )
-					$processRequest->getUser($this->userId);
+					$processRequest->getUser($this->userId,$this->password);
 					else
+					{
+						
 					$processRequest->getAllUser();
+					}
 				}
 				
 			case 'POST':
