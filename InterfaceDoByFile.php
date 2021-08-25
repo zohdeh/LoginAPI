@@ -1,9 +1,9 @@
 <?php
 Interface InterfaceDoByFile
 {
-	public function getUser($userId);
+	public function getUser(string $uId);
 	public function getAllUser();
-	public function createNewUser($user);
+	public function createNewUser();
 	public function updateUser($userId);
 	public function deleteUser($userId);
 }

@@ -3,51 +3,99 @@ include $_SERVER['DOCUMENT_ROOT'].'/API/Controller/InterfaceDoByFile.php';
 class doByJson implements InterfaceDoByFile
 {
 	private $jsonfile;
+	private $path;
+	private $myarray;
+	private $uId;
 	public function __construct()
 	{
-		$path = $_SERVER['DOCUMENT_ROOT'].'/API/user.json';
-		//$jsonfile = file_get_contents($path);
+		$this->path = $_SERVER['DOCUMENT_ROOT'].'/API/myuser.txt';
+		$this->myarray= array (array("userId"=>'10',"pwd"=>'123'),array("userId"=>'11',"pwd"=>'456'));
+		$this->uId=null;   
 	}
 	public function __destruct()
 	{
 		
 	}
-	public function getUser($userID)
+	public function getUser($uID)
 	{
-		$result = findByUserId($userId);
-		if ( !$result )
-			return notFoundUser();
-		else
-		
-		$response['body'] = json_encode($result);
-		$response['status_code_header'] = 'HTTP/1.1 200 OK';
-		return $response;
-	}
-	private function findByUserId($userId)
-	{
-		$usersJson = fopen('$path',"r");
-		$result= json_decode($usersJson);
-		foreach ($result as $user)
+		echo $this->uId;
+		$arrayItems = count($this->myarray);
+		echo ($arrayItems);
+		while ($i<=$arrayItems)
 		{
-			if ($user->userId == $userId)
-				return $user;
-			else 
-				return false;
-	}  }
+		if ( $this->myarray[$i]['userId']==$userId)
+				var_dump( myarray[$i]);
+		else
+		$i++;
+		}
+		return null;
+		/* $response['body'] = json_encode($foundUser);
+		$response['status_code_header'] = 'HTTP/1.1 200 OK';
+		return $response; */ 
+		
+	}
+	public function searchForId($uId)
+	{
+		$arrayItems = count($this->myarray);
+		echo ($arrayItems);
+		while ($i<=$arrayItems)
+		{
+			if ($this->myarray[$i]['userId']==$userId)
+			return $i;
+		}
+		return null;
+		 
+			/* if ($tarray['userID']==$userID)
+			 return $myarray.current;*/
+	
+   
+	}
+	
+	
 	public function getAllUser()
 	{
-		$usersJson = fopen('$path',"r");
+		var_dump ($this->myarray);
 		
+		/* 
+		$usersJson = file_get_contents($_SERVER['DOCUMENT_ROOT'].'/API/user.txt');
+		$response['body']=json_encode($usersJson);
 		$response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($usersJson);
-		fclose($usersJson);
-		return $response;
+        return $response; */
+		
 		
 	}
-	public function createNewUser($user)
+	public function createNewUser()
 	{
+		/* $usersJson = file_get_contents('php://input');
+		$user =(array) json_encode($userJson);
+		if (! $this->validateUser($input))
+			return unknowninput();
+		addUserToFile($user);
+		$response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = null;
+        return $response; */
+		
 		
 	}
+	//private addUserToFile($newUser)
+	//{
+		/* //$usersJson =(array)json_encode( file_get_contents($this->path));
+		//array_push($userJson,$newUser);
+		file_put_contents($this->path,$newUser,File_append); */
+	//}
+	private function validateUser($input)
+    {
+        if (! isset($input['UserId'])) {
+            return false;
+        }
+        if (! isset($input['pwd'])) {
+            return false;
+        }
+		if (! isset($input['phone'])) {
+            return false;
+        }
+        return true;
+    }
 	public function updateUser($userId)
 	{
 		
